@@ -7,7 +7,6 @@ import { server } from "../../server";
 import { toast } from "react-toastify";
 import { RxAvatar } from "react-icons/rx";
 
-
 const ShopCreate = () => {
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
@@ -20,44 +19,45 @@ const ShopCreate = () => {
 
   const navigate = useNavigate();
 
-  // ✅ Fixed handleSubmit function
   const handleSubmit = async (e) => {
     e.preventDefault();
-    try {
-      const newForm = new FormData();
-      if (avatar) newForm.append("file", avatar);
-      newForm.append("name", name);
-      newForm.append("email", email);
-      newForm.append("password", password);
-      newForm.append("zipCode", zipCode);
-      newForm.append("address", address);
-      newForm.append("phoneNumber", phoneNumber);
 
-      const res = await axios.post(`${server}/shop/create-shop`, newForm, {
-        headers: { "Content-Type": "multipart/form-data" },
-      });
-
-      
-      if (res.data.success) {
+    axios
+      .post(`${server}/shop/create-shop`, {
+        name,
+        email,
+        password,
+        avatar,
+        zipCode,
+        address,
+        phoneNumber,
+      })
+      .then((res) => {
         toast.success(res.data.message);
         setName("");
         setEmail("");
         setPassword("");
         setAvatar();
-        setPassword("");
+        setZipCode();
         setAddress("");
-        setPhoneNumber("")
-        setZipCode("")
-      }
-    } catch (error) {
-      toast.error(error.response.data.message);
-    }
+        setPhoneNumber();
+      })
+      .catch((error) => {
+        toast.error(error.response.data.message);
+      });
   };
 
   const handleFileInputChange = (e) => {
-    setAvatar(e.target.files[0]);
-  };
+    const reader = new FileReader();
 
+    reader.onload = () => {
+      if (reader.readyState === 2) {
+        setAvatar(reader.result);
+      }
+    };
+
+    reader.readAsDataURL(e.target.files[0]);
+  };
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-md">
@@ -197,7 +197,7 @@ const ShopCreate = () => {
                 <span className="inline-block h-8 w-8 rounded-full overflow-hidden">
                   {avatar ? (
                     <img
-                      src={URL.createObjectURL(avatar)}
+                      src={avatar}
                       alt="avatar"
                       className="h-full w-full object-cover rounded-full"
                     />
@@ -212,10 +212,10 @@ const ShopCreate = () => {
                   <span>Upload a file</span>
                   <input
                     type="file"
+                    name="avatar"
                     id="file-input"
                     onChange={handleFileInputChange}
                     className="sr-only"
-                    accept=".jpg,.png,.jpeg"
                   />
                 </label>
               </div>

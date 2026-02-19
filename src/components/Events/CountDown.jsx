@@ -1,50 +1,63 @@
-import React, { useEffect, useState } from 'react'
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import { server } from "../../server";
 
-const CountDown = () => {
-    const [timeLeft,setTimeLeft]=useState(calculateTimeLeft())
-    
-    useEffect(()=>{
-        const timer=setTimeout(()=>{
-            setTimeLeft(calculateTimeLeft())  // state update 
-        }, 1000) // 1sec 
-        return ()=> clearTimeout(timer)
-    })
+const CountDown = ({ data }) => {
+  const [timeLeft, setTimeLeft] = useState(calculateTimeLeft());
 
-    function calculateTimeLeft(){
-      const difference = +new Date('2026-08-25') - +new Date();  // +convert milisec
-        let timeLeft={};
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setTimeLeft(calculateTimeLeft());
+    }, 1000);
 
-        if(difference > 0){
-            timeLeft={
-                days:Math.floor(difference / (1000 * 60 * 60  * 24)),
-                hours:Math.floor((difference / (1000 * 60 *60 ))  % 24) ,
-                minutes: Math.floor((difference / 1000/ 60) % 60),  // 60 remaining min sec
-                seconds: Math.floor((difference / 1000) % 60),
+    if (
+      typeof timeLeft.days === 'undefined' &&
+      typeof timeLeft.hours === 'undefined' &&
+      typeof timeLeft.minutes === 'undefined' &&
+      typeof timeLeft.seconds === 'undefined'
+    ) {
+      axios.delete(`${server}/event/delete-shop-event/${data._id}`);
+    }
+    return () => clearTimeout(timer);
+  });
 
-            }
-        }
-        return timeLeft
+  function calculateTimeLeft() {
+    const difference = +new Date(data?.Finish_Date) - +new Date();
+    let timeLeft = {};
+
+    if (difference > 0) {
+      timeLeft = {
+        days: Math.floor(difference / (1000 * 60 * 60 * 24)),
+        hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
+        minutes: Math.floor((difference / 1000 / 60) % 60),
+        seconds: Math.floor((difference / 1000) % 60),
+      };
     }
 
-    const timerComponents= Object.keys(timeLeft).map((interval)=>{  //keys [hour,min,sec]
-        if(!timeLeft[interval]){ // rhis will prevent to 0 days
-            return null;
-        }
-        return (
-            <span className='text-[25px] text-[#4756d2]'>
-      {timeLeft[interval]} {interval} {""}
-    </span>
-        )
-        
+    return timeLeft;
+  }
 
-    })
+  const timerComponents = Object.keys(timeLeft).map((interval) => {
+    if (!timeLeft[interval]) {
+      return null;
+    }
 
-    
+    return (
+      <span className="text-[25px] text-[#475ad2]">
+        {timeLeft[interval]} {interval}{" "}
+      </span>
+    );
+  });
+
   return (
-      <div>
-        {timerComponents.length ? timerComponents :<span className='text-[red] text-[25px] '>Time's up</span>}
-      </div>
-  )
-}
+    <div>
+      {timerComponents.length ? (
+        timerComponents
+      ) : (
+        <span className="text-[red] text-[25px]">Time's Up</span>
+      )}
+    </div>
+  );
+};
 
-export default CountDown
+export default CountDown;

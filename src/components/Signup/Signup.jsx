@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import { RxAvatar } from "react-icons/rx";
-import { Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 import axios from "axios";
 import styles from "../../styles/style";
 import { server } from "../../server";
@@ -16,43 +16,34 @@ export const Signup = () => {
   const [avatar, setAvatar] = useState(null);
   const [preview, setPreview] = useState(null);
 
-  useEffect(() => {
-    if (!avatar) {
-      setPreview(null);
-      return;
-    }
-    const objectUrl = URL.createObjectURL(avatar);
-    setPreview(objectUrl);
-    return () => URL.revokeObjectURL(objectUrl);
-  }, [avatar]);
+  const handleFileInputChange = (e) => {
+    const reader = new FileReader();
+
+    reader.onload = () => {
+      if (reader.readyState === 2) {
+        setAvatar(reader.result);
+      }
+    };
+
+    reader.readAsDataURL(e.target.files[0]);
+    // setAvatar(e.target.files[0]);
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    try {
-      const newForm = new FormData();
-      if (avatar) newForm.append("file", avatar);
-      newForm.append("name", name);
-      newForm.append("email", email);
-      newForm.append("password", password);
 
-      const res = await axios.post(`${server}/user/create-user`, newForm, {
-        headers: { "Content-Type": "multipart/form-data" },
+    axios
+      .post(`${server}/user/create-user`, { name, email, password, avatar })
+      .then((res) => {
+        toast.success(res.data.message);
+        setName("");
+        setEmail("");
+        setPassword("");
+        setAvatar();
+      })
+      .catch((error) => {
+        toast.error(error.response.data?.message);
       });
-
-      if (res.data.success) {
-       toast.success(res.data.message)
-       setName("");
-       setEmail("");
-       setPassword("");
-       setAvatar();
-      }
-    } catch (error) {
-      toast.error(error.response.data.message)
-    }
-  };
-
-  const handleFileInputChange = (e) => {
-    setAvatar(e.target.files[0]);
   };
 
   return (
@@ -179,7 +170,4 @@ export const Signup = () => {
   );
 };
 
-
-
-
-export default Signup
+export default Signup;

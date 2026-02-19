@@ -1,50 +1,47 @@
 import { createReducer } from "@reduxjs/toolkit";
 
 const initialState = {
-  seller: null,           // ✅ Correct entity for sellers
-  token: null,
-  isAuthenticated: false,
-  isLoading: false,       // ✅ Consistent naming
+  isLoading: true,
+  isSeller: false,
+  seller: null,
+  sellers: [],
   error: null,
 };
 
 export const sellerReducer = createReducer(initialState, (builder) => {
   builder
-    // ===== Load Seller Request =====
+    // Load Seller
     .addCase("LoadSellerRequest", (state) => {
       state.isLoading = true;
-      state.error = null;
     })
-
-    // ===== Load Seller Success =====
     .addCase("LoadSellerSuccess", (state, action) => {
-      state.isAuthenticated = true;
+      state.isSeller = true;
       state.isLoading = false;
-      state.seller = action.payload.seller; // ✅ Store seller info
-      state.token = action.payload.token;   // ✅ Store token
+      state.seller = action.payload;
       state.error = null;
     })
-
-    // ===== Load Seller Fail =====
     .addCase("LoadSellerFail", (state, action) => {
       state.isLoading = false;
-      state.error = action.payload || "Failed to load seller";
-      state.isAuthenticated = false;
+      state.error = action.payload;
+      state.isSeller = false;
       state.seller = null;
-      state.token = null;
     })
 
-    // ===== Clear Errors =====
-    .addCase("ClearErrors", (state) => {
-      state.error = null;
+    // Get All Sellers (Admin)
+    .addCase("getAllSellersRequest", (state) => {
+      state.isLoading = true;
     })
-
-    // ===== Logout Success =====
-    .addCase("LogoutSuccess", (state) => {
-      state.seller = null;         // ✅ Correct key cleared
-      state.token = null;
-      state.isAuthenticated = false;
+    .addCase("getAllSellersSuccess", (state, action) => {
       state.isLoading = false;
+      state.sellers = action.payload;
+    })
+    .addCase("getAllSellersFailed", (state, action) => {
+      state.isLoading = false;
+      state.error = action.payload;
+    })
+
+    // Clear Errors
+    .addCase("clearErrors", (state) => {
       state.error = null;
     });
 });

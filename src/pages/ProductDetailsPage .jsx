@@ -1,37 +1,39 @@
-import React, { useEffect, useState } from 'react'
-import Header from '../components/Layout/Header'
-import Footer from '../components/Layout/Footer'
-import ProductDetails from "../components/product/ProductDetails"
-import { useParams } from 'react-router-dom'
-import { productData } from '../static/data'
-import SuggestedProduct from "../components/product/SuggestedProduct"
+import React, { useEffect, useState } from "react";
+import Header from "../components/Layout/Header";
+import Footer from "../components/Layout/Footer";
+import ProductDetails from "../components/product/ProductDetails";
+import SuggestedProduct from "../components/product/SuggestedProduct";
+import { useParams, useSearchParams } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const ProductDetailsPage = () => {
-  const { id } = useParams()
-  const [data, setData] = useState(null)
+  const { id } = useParams();
+  const [data, setData] = useState(null);
 
-  // helper to slugify product names -> "Iphone 14 ..." => "iphone-14-..."
-  const slugify = (str) =>
-    str.toLowerCase().replace(/\s+/g, "-")
+  const { allProducts } = useSelector((state) => state.products);
+  const { allEvents } = useSelector((state) => state.event);
+
+  const [searchParams] = useSearchParams();
+  const isEvent = searchParams.get("isEvent");
 
   useEffect(() => {
-    const product = productData.find(
-      (i) => slugify(i.name) === id.toLowerCase()
-    )
-    setData(product || null)
-  }, [id])
+    if (isEvent) {
+      const event = allEvents?.find((item) => item._id === id);
+      setData(event || null);
+    } else {
+      const product = allProducts?.find((item) => item._id === id);
+      setData(product || null);
+    }
+  }, [id, isEvent, allProducts, allEvents]);
 
   return (
-    <div>
+    <>
       <Header />
-      
-        <ProductDetails data={data} />
-      {
-        data && <SuggestedProduct data={data}/>
-      }
+      {data && <ProductDetails data={data} />}
+      {data && <SuggestedProduct data={data} />}
       <Footer />
-    </div>
-  )
-}
+    </>
+  );
+};
 
-export default ProductDetailsPage
+export default ProductDetailsPage;

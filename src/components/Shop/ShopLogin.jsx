@@ -15,12 +15,7 @@ const ShopLogin = () => {
 
   const navigate=useNavigate()
     const { isSeller, seller } = useSelector((state) => state.seller);
- // is ko bhi dakna ha baad ma 
-   useEffect(()=>{
-      if(isSeller === true){
-       navigate(`/shop/${seller._id}`)
-      }
-   },[])
+ 
 
 
   const handleSubmit =async(e)=>{
@@ -32,6 +27,7 @@ const ShopLogin = () => {
     },{withCredentials:true}// bcz we store cookie
   ). then((res)=>{
       toast.success("Login Successfull");
+      navigate("/dashboard")
       window.location.reload(true)
     })
     .catch((error)=>{
