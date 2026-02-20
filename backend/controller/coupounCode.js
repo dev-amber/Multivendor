@@ -8,8 +8,8 @@ const express = require("express");
 const router = express.Router();
 
 // create CoupounCode {/* is Seller*/} also add in this verification
- { /**router.post(
-  "/create-coupon-code",
+ router.post(
+  "/create-coupon-code",isSeller,
   catchAsyncErrors(async (req, res, next) => {
     try {
       const isCouponCodeExist = await CoupounCode.find({
@@ -49,6 +49,29 @@ router.get(
   })
 );
 
+
+
+// delete coupoun code of a shop
+router.delete(
+  "/delete-coupon/:id",
+  isSeller,
+  catchAsyncErrors(async (req, res, next) => {
+    try {
+      const couponCode = await CoupounCode.findByIdAndDelete(req.params.id);
+
+      if (!couponCode) {
+        return next(new ErrorHandler("Coupon code dosen't exists!", 400));
+      }
+      res.status(201).json({
+        success: true,
+        message: "Coupon code deleted successfully!",
+      });
+    } catch (error) {
+      return next(new ErrorHandler(error, 400));
+    }
+  })
+);
+
 // get coupon code value
 router.get(
   "/get-coupon-value/:name",
@@ -65,6 +88,6 @@ router.get(
     }
   })
 );
-  **/}
+  
 
 module.exports = router;
