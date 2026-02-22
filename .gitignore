@@ -1,0 +1,7 @@
+backend/config/.env
+fronted/node_modules
+backend/node_modules
+socket/node_modules
+node_modules/
+
+npm-debug.logo
