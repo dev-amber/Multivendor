@@ -8,7 +8,9 @@ const cors=require("cors")
 app.use(express.json())
 app.use(cookieParser())
 app.use(cors(({ origin: "http://localhost:3000", credentials: true })))
-//app.use("/avatars",express.static("avatars")); // we write bcz it uploads access anyone
+app.use("/",(req,res)=>{
+    res.send("Hello World!");
+});
 app.use(bodyParser.urlencoded({extended:true}))
 
 
@@ -16,7 +18,7 @@ app.use(bodyParser.urlencoded({extended:true}))
 //config
 if(process.env.NODE_ENV !== "PRODUCTION"){
     require("dotenv").config({
-        path:  __dirname +"/config/.env"
+        path:"./config/.env",
     })
 }
 

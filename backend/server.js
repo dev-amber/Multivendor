@@ -15,7 +15,7 @@ app.use(express.urlencoded({ extended: true }));
 
 // Config
 if (process.env.NODE_ENV !== "PRODUCTION") {
-    require("dotenv").config({ path: __dirname + "/config/.env" });
+    require("dotenv").config({ path: "./config/.env" });
 }
 
 // connect database
