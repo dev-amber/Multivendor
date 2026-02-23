@@ -7,9 +7,10 @@ const ErrorHandler = require("../utils/ErrorHandler");
 const express = require("express");
 const router = express.Router();
 
-// create CoupounCode {/* is Seller*/} also add in this verification
- { /**router.post(
+// create CoupounCode
+router.post(
   "/create-coupon-code",
+  isSeller,
   catchAsyncErrors(async (req, res, next) => {
     try {
       const isCouponCodeExist = await CoupounCode.find({
@@ -28,13 +29,14 @@ const router = express.Router();
     } catch (error) {
       return next(new ErrorHandler(error, 400));
     }
-  })
+  }),
 );
 
-// get all coupons code of shop isSeller also add but error
+// get all coupons code of shop
 
 router.get(
-  "/get-coupon/:id",isSeller,
+  "/get-coupon/:id",
+  isSeller,
   catchAsyncErrors(async (req, res, next) => {
     try {
       const couponCodes = await CoupounCode.find({ shopId: req.params.id });
@@ -46,7 +48,28 @@ router.get(
     } catch (error) {
       return next(new ErrorHandler(error, 400));
     }
-  })
+  }),
+);
+
+// delete coupoun code of a shop
+router.delete(
+  "/delete-coupon/:id",
+  isSeller,
+  catchAsyncErrors(async (req, res, next) => {
+    try {
+      const couponCode = await CoupounCode.findByIdAndDelete(req.params.id);
+
+      if (!couponCode) {
+        return next(new ErrorHandler("Coupon code dosen't exists!", 400));
+      }
+      res.status(201).json({
+        success: true,
+        message: "Coupon code deleted successfully!",
+      });
+    } catch (error) {
+      return next(new ErrorHandler(error, 400));
+    }
+  }),
 );
 
 // get coupon code value
@@ -63,8 +86,7 @@ router.get(
     } catch (error) {
       return next(new ErrorHandler(error, 400));
     }
-  })
+  }),
 );
-  **/}
 
 module.exports = router;

@@ -33,11 +33,7 @@ const EventCard = ({ active, data }) => {
     >
       {/* left side - Image */}
       <div className="w-full lg:w-[50%] m-auto">
-        <img
-          src={`${backend_url}${data?.images[0]}`}
-          alt="iPhone"
-          className="w-full h-auto object-contain"
-        />
+       <img src={`${data.images[0]?.url}`} alt="" />
       </div>
       {/* right side - Content */}
       <div className="w-full lg:w-[50%] flex flex-col justify-center p-4">

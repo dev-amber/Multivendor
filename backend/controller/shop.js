@@ -215,9 +215,16 @@ router.put(
     try {
       const existsSeller = await Shop.findById(req.seller._id);
 
-      const imageId = existsSeller.avatar.public_id;
+      if (!existsSeller) {
+        return next(new ErrorHandler("Seller not found", 404));
+      }
 
-      await cloudinary.v2.uploader.destroy(imageId);
+      // 🔥 SAFETY CHECK
+      if (existsSeller.avatar && existsSeller.avatar.public_id) {
+        await cloudinary.v2.uploader.destroy(
+          existsSeller.avatar.public_id
+        );
+      }
 
       const myCloud = await cloudinary.v2.uploader.upload(req.body.avatar, {
         folder: "avatars",
@@ -230,14 +237,15 @@ router.put(
       };
 
       await existsSeller.save();
-      res.status(201).json({
+
+      res.status(200).json({
         success: true,
         seller: existsSeller,
       });
     } catch (error) {
       return next(new ErrorHandler(error.message, 500));
     }
-  }),
+  })
 );
 
 // update shop profile/info
@@ -246,12 +254,12 @@ router.put(
   isSeller,
   catchAsyncErrors(async (req, res, next) => {
     try {
-      const { name, description, address, phoneNumber, zipCode } = req.body;
+        const { name, description, address, phoneNumber, zipCode } = req.body;
 
-      const shop = await Shop.findOne(req.seller._id);
+   const shop = await Shop.findById(req.seller._id);
 
       if (!shop) {
-        return next(new ErrorHandler("User not found", 400));
+        return next(new ErrorHandler("Seller not found", 400));
       }
       shop.name = name;
       shop.description = description;

@@ -43,8 +43,8 @@ import {
   AdminDashboardSellerPage,
   AdminDashboardOrdersPage,
   AdminDashboardProductsPage,
- AdminDashboardEventsPage ,
-AdminDashboardWithdrawPage ,
+  AdminDashboardEventsPage,
+  AdminDashboardWithdrawPage,
 } from "./routes/AdminRoutes";
 import { ToastContainer } from "react-toastify";
 import { useDispatch } from "react-redux";
@@ -77,7 +77,6 @@ const App = () => {
     dispatch(getAllEvents()); // ✅ Correct
     getStripeApikey();
   }, []);
-
 
   console.log(stripeApiKey);
 
@@ -272,11 +271,8 @@ const App = () => {
           path="/admin-products"
           element={<AdminDashboardProductsPage />}
         />
+        <Route path="/admin-events" element={<AdminDashboardEventsPage />} />
         <Route
-          path="/admin-events"
-          element={<AdminDashboardEventsPage />}
-        />
-         <Route
           path="/admin-withdraw-request"
           element={<AdminDashboardWithdrawPage />}
         />

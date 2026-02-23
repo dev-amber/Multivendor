@@ -6,7 +6,7 @@ const { isSeller, isAuthenticated } = require("../middleware/auth");
 const router = express.Router();
 
 // create a new conversation
- { /**router.post(
+router.post(
   "/create-new-conversation",
   catchAsyncErrors(async (req, res, next) => {
     try {
@@ -104,5 +104,5 @@ router.put(
     }
   })
 );
- **/}
+ 
 module.exports = router;
