@@ -15,12 +15,13 @@ app.use(bodyParser.urlencoded({extended:true}))
 
 
 
-//config
-if(process.env.NODE_ENV !== "PRODUCTION"){
-    require("dotenv").config({
-        path:"./config/.env",
-    })
+// config
+if (process.env.NODE_ENV !== "PRODUCTION") {
+  require("dotenv").config({
+    path: "config/.env",
+  });
 }
+
 
 //imports routes
 const user=require("./controller/user");

@@ -13,10 +13,13 @@ process.on("uncaughtException", (err) => {
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// Config
+// config
 if (process.env.NODE_ENV !== "PRODUCTION") {
-    require("dotenv").config({ path: "./config/.env" });
+  require("dotenv").config({
+    path: "config/.env",
+  });
 }
+
 
 // connect database
 connectDatabase()
