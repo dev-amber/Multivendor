@@ -1,6 +1,4 @@
- // static data used bcz our website is static
-
- // navigation Data
+// navigation Data
 export const navItems = [
     {
       title: "Home",
@@ -231,13 +229,13 @@ export const navItems = [
       title: "Gifts",
       subTitle: "",
       image_Url:
-        "https://securecdn.pymnts.com/wp-content/uploads/2014/11/Gifts-Photo-700x489.jpg",
+        "https://neurongarage.com/wp-content/uploads/2021/12/getty_168325476_349217-e1643926469153.jpg",
     },
     {
       id: 7,
       title: "Pet Care",
       subTitle: "",
-      image_Url: "https://cdn.openpr.com/T/c/Tc15444071_g.jpg",
+      image_Url: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSw-m3O3HGrMNxOCI8Mc8sd8rPmWnVyC1M4zA&s",
     },
     {
       id: 8,
@@ -372,7 +370,7 @@ export const navItems = [
         },
       ],
       shop: {
-        name: "Shahriar Watch House",
+        name: "Watch House",
         shop_avatar: {
           public_id: "test",
           url: "https://www.hatchwise.com/wp-content/uploads/2022/05/amazon-logo-1024x683.png",
@@ -472,7 +470,7 @@ export const navItems = [
         },
       ],
       shop: {
-        name: "Shahriar Watch House",
+        name: "Watch House",
         shop_avatar: {
           public_id: "test",
           url: "https://www.hatchwise.com/wp-content/uploads/2022/05/amazon-logo-1024x683.png",
