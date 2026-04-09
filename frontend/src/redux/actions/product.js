@@ -21,8 +21,6 @@ export const createProduct =
         type: "productCreateRequest",
       });
       // its only send requestto backend not for redux
-      const config = { headers: { "Content-Type": "multipart/form-data" } };
-
       const { data } = await axios.post(
         `${server}/product/create-product`,
         name,

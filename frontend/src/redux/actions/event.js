@@ -1,4 +1,3 @@
-import { useDispatch } from "react-redux";
 import { server } from "../../server";
 import axios from "axios";
 
