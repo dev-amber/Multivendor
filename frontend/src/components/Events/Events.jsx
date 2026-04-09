@@ -4,7 +4,12 @@ import EventCard from "./EventCard";
 import { useSelector, useDispatch } from "react-redux";
 import { getAllEvents } from "../../redux/actions/event";
 const Events = () => {
+  const dispatch = useDispatch();
   const { allEvents, isLoading } = useSelector((state) => state.event);
+
+  useEffect(() => {
+    dispatch(getAllEvents());
+  }, [dispatch]);
 
   console.log("Events:", allEvents);
 
