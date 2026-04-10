@@ -9,11 +9,12 @@ import { useNavigate } from "react-router-dom";
 import { AiOutlineArrowRight, AiOutlineSend } from "react-icons/ai";
 import { TfiGallery } from "react-icons/tfi";
 import styles from "../styles/style";
+
 const ENDPOINT = "http://localhost:5000/";
 const socketId = socketIO(ENDPOINT, { transports: ["websocket"] });
 
 const UserInbox = () => {
-  const { user,loading } = useSelector((state) => state.user);
+  const { user, loading } = useSelector((state) => state.user);
   const [conversations, setConversations] = useState([]);
   const [arrivalMessage, setArrivalMessage] = useState(null);
   const [currentChat, setCurrentChat] = useState();
@@ -23,6 +24,7 @@ const UserInbox = () => {
   const [onlineUsers, setOnlineUsers] = useState([]);
   const [activeStatus, setActiveStatus] = useState(false);
   const [open, setOpen] = useState(false);
+  const [images, setImages] = useState(null); // FIXED: Added missing state
   const scrollRef = useRef(null);
 
   useEffect(() => {
@@ -160,7 +162,6 @@ const UserInbox = () => {
   };
 
   const imageSendingHandler = async (e) => {
-
     const receiverId = currentChat.members.find(
       (member) => member !== user._id
     );
@@ -183,7 +184,7 @@ const UserInbox = () => {
           }
         )
         .then((res) => {
-          setImages();
+          setImages(null); // FIXED: Changed from setImages() to setImages(null)
           setMessages([...messages, res.data.message]);
           updateLastMessageForImage();
         });
@@ -367,6 +368,7 @@ const SellerInbox = ({
                 item.sender === sellerId ? "justify-end" : "justify-start"
               }`}
               ref={scrollRef}
+              key={index}
             >
               {item.sender !== sellerId && (
                 <img

@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { getAllEvents } from "../../redux/actions/event";
 const Events = () => {
   const dispatch = useDispatch();
-  const { allEvents, isLoading } = useSelector((state) => state.event);
+  const { allEvents = [], isLoading } = useSelector((state) => state.event);
 
   useEffect(() => {
     dispatch(getAllEvents());
@@ -22,11 +22,11 @@ const Events = () => {
           </div>
 
           <div className="w-full grid">
-            {allEvents.length !== 0 && (
-              <EventCard data={allEvents && allEvents[0]} />
+            {allEvents && allEvents.length !== 0 && (
+              <EventCard data={allEvents[0]} />
             )}
 
-            <h4>{allEvents.length === 0 && "No Events have!"}</h4>
+            <h4>{allEvents && allEvents.length === 0 && "No Events have!"}</h4>
           </div>
         </div>
       )}
