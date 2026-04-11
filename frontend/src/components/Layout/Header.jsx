@@ -310,12 +310,12 @@ const Header = ({ activeHeading }) => {
               <br />
 
               <div className="flex w-full justify-center">
-                {isAuthenticated ? (
+                {isAuthenticated && user ? (
                   <div>
                     <Link to="/profile">
                       <img
                         src={`${user.avatar?.url}`}
-                        alt=""
+                        alt="user avatar"
                         className="w-[60px] h-[60px] rounded-full border-[3px] border-[#0eae88]"
                       />
                     </Link>
