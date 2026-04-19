@@ -75,7 +75,7 @@ const App = () => {
     dispatch(getAllProducts());
     dispatch(getAllEvents()); // ✅ Correct
     getStripeApikey();
-  }, [dsipatch]);
+  }, []);
 
 
   return (

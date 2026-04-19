@@ -23,6 +23,7 @@ const DashboardMessages = () => {
   const [onlineUsers, setOnlineUsers] = useState([]);
   const [activeStatus, setActiveStatus] = useState(false);
   const [open, setOpen] = useState(false);
+  const[images,setImages]=useState();
   const scrollRef = useRef(null);
 
   useEffect(() => {
