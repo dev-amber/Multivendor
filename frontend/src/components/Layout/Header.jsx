@@ -110,7 +110,7 @@ const Header = ({ activeHeading }) => {
       <div
         className={`${
           active === true ? "shadow-sm fixed top-0 left-0 z-10" : null
-        } transition hidden lg:flex items-center justify-between w-full bg-[#111827] h-[70px]`}
+        } transition hidden lg:flex items-center justify-between w-full bg-[#1F2937] h-[70px]`}
       >
         <div
           className={`${styles.section} relative ${styles.noramlFlex} justify-between`}
