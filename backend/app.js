@@ -8,7 +8,7 @@ const path=require("path");
 
 app.use(express.json())
 app.use(cookieParser())
-app.use(cors(({ origin: "https://multivendor-e-shop-frontend-iuc506yax-dev-amber1s-projects.vercel.app/", credentials: true })))
+app.use(cors(({ origin: "https://multivendor-e-shop-frontend-indol.vercel.app", credentials: true })))
 app.use(express.static(path.join(__dirname, "./uploads")));
 app.use("/test",(req,res)=>{
     res.send("Hello World!");
