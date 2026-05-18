@@ -7,6 +7,8 @@ const sendShopToken = (seller, statusCode, res) => {
   const options = {
     expires: new Date(Date.now() + 90 * 24 * 60 * 60 * 1000), // 90 days
     httpOnly: true,  // ✅ secure from XSS
+     sameSite: "none", // 👈 better for localhost
+    secure: true,
 
   };
 

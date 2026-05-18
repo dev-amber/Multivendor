@@ -7,7 +7,7 @@ const sendToken = (user, statusCode, res) => {
     expires: new Date(Date.now() + 90 * 24 * 60 * 60 * 1000), // in this expiry 1 day
     httpOnly: true,
     sameSite: "none", // 👈 better for localhost
-    Secure: true,
+    secure: true,
   };
 
   console.log(process.env.JWT_EXPIRES);
