@@ -29,7 +29,7 @@ const ProfileContent = ({ active }) => {
   const [email, setEmail] = useState(user && user.email);
   const [phoneNumber, setPhoneNumber] = useState(user && user.phoneNumber);
   const [password, setPassword] = useState("");
-  const [avatar,setAvatar]=useState(null);
+  const [setAvatar]=useState(null);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -284,8 +284,7 @@ const AllOrders = () => {
 
 const AllRefundsOrders = () => {
   const { orders } = useSelector((state) => state.order);
-  const { user } = useSelector((state) => state.user);
-  const dispatch = useDispatch();
+  
 
   const eligibleOrders =
     orders && orders.filter((item) => item.status === "Processing refund"); // orders bcz an array

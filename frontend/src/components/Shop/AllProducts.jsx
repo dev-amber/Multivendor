@@ -7,7 +7,7 @@ import Loader from "../Layout/Loader";
 import { DataGrid } from "@mui/x-data-grid";
 import { Button } from "@mui/material";
 import { deleteProduct } from "../../redux/actions/product";
-import styles from "../../styles/style";
+
 
 const AllProducts = () => {
   const dispatch = useDispatch();

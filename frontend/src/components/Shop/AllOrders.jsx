@@ -5,7 +5,6 @@ import { AiOutlineArrowRight } from "react-icons/ai";
 import Loader from "../Layout/Loader";
 import { DataGrid } from "@mui/x-data-grid";
 import { Button } from "@mui/material";
-import { deleteProduct } from "../../redux/actions/product";
 import { getAllOrderOfShop } from "../../redux/actions/order";
 
 const AllOrders = () => {
@@ -19,7 +18,7 @@ const AllOrders = () => {
     if (seller?._id) {
       dispatch(getAllOrderOfShop(seller._id));
     }
-  }, [dispatch]);
+  }, [dispatch,seller._id]);
 
   const columns = [
     { field: "id", headerName: "Order ID", minWidth: 150, flex: 0.7 },

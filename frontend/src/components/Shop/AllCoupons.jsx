@@ -35,7 +35,7 @@ const AllCoupons = () => {
      setIsLoading(false);
     })
     
-  }, [ dispatch]);
+  }, [ dispatch,seller?._id]);
 
 
   const handleDelete = async (id) => {

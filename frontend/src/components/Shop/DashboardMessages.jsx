@@ -23,7 +23,7 @@ const DashboardMessages = () => {
   const [onlineUsers, setOnlineUsers] = useState([]);
   const [activeStatus, setActiveStatus] = useState(false);
   const [open, setOpen] = useState(false);
-  const[images,setImages]=useState();
+  const[setImages]=useState();
   const scrollRef = useRef(null);
 
   useEffect(() => {
@@ -264,7 +264,7 @@ const MessageList = ({
   isLoading,
 }) => {
   
-  const [user, setUser] = useState([]);
+ const [user] = useState([]);
   const navigate = useNavigate();
   const handleClick = (id) => {
     navigate(`/dashboard-messages?${id}`);
@@ -275,7 +275,7 @@ const MessageList = ({
   const [active, setActive] = useState(0);
 
   useEffect(() => {
-    const userId = data.members.find((user) => user != me);
+    const userId = data.members.find((user) => user !== me);
 
     const getUser = async () => {
       try {
@@ -286,7 +286,7 @@ const MessageList = ({
       }
     };
     getUser();
-  }, [me, data]);
+  }, [me, data,setUserData]);
 
  
 
@@ -386,7 +386,7 @@ const SellerInbox = ({
                 )}
                 {item.images && (
                   <img
-                    src={`${item.images?.url}`}
+                    src={`${item.images?.url}`} alt=""
                     className="w-[300px] h-[300px] object-cover rounded-[10px] mr-2"
                   />
                 )}

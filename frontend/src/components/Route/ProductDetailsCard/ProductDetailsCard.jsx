@@ -56,7 +56,7 @@ const ProductDetailsCard = ({ setOpen, data }) => {
     } else {
       setClick(false);
     }
-  }, [wishlist,dispatch]);
+  }, [wishlist,dispatch,data._id]);
 
   const removeFromWishListHandler = (data) => {
     setClick(!click);

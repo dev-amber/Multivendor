@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import {  Routes, Route, useNavigate } from "react-router-dom";
+import {  Routes, Route} from "react-router-dom";
 import "./App.css";
 import {
   LoginPage,
@@ -61,7 +61,6 @@ import axios from "axios";
 
 const App = () => {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
   const [stripeApiKey, setStripeApiKey] = useState("");
 
   async function getStripeApikey() {
@@ -75,7 +74,7 @@ const App = () => {
     dispatch(getAllProducts());
     dispatch(getAllEvents()); // ✅ Correct
     getStripeApikey();
-  }, []);
+  }, [dispatch]);
 
 
   return (

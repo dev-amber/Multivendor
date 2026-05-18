@@ -30,7 +30,7 @@ const CreateProduct = () => {
       toast.success("Product created successfully");
       navigate("/dashboard");
     }
-  }, [dispatch, error, success]);
+  }, [dispatch, error, success,navigate]);
 
   const handleImageChange = (e) => {
     const files = Array.from(e.target.files);

@@ -11,7 +11,7 @@ const SuggestedProduct = ({ data }) => {
     const d =
       allProducts && allProducts.filter((i) => i.category === data.category);
     setProductData(d);
-  });
+  }, [data.category, allProducts]);
   return (
     <div>
       {data ? (
