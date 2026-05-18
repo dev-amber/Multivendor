@@ -10,7 +10,7 @@ import { AiOutlineArrowRight, AiOutlineSend } from "react-icons/ai";
 import { TfiGallery } from "react-icons/tfi";
 import styles from "../styles/style";
 
-const ENDPOINT = "http://localhost:5000/";
+const ENDPOINT = "https://socket-server-e-shop-production.up.railway.app";
 const socketId = socketIO(ENDPOINT, { transports: ["websocket"] });
 
 const UserInbox = () => {
