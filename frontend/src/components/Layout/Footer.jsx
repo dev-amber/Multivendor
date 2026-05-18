@@ -6,8 +6,8 @@ import { Link } from 'react-router-dom';
 
 const Footer = () => {
   return (
-    <div className='bg-[#1F2937] text-[#fff] '>
-        <div className='md:flex md:justify-between md:items-center sm:px-12 px-4 bg-[#342ace] py-2'>
+    <div className='bg-[#111827] text-[#fff] '>
+        <div className='md:flex md:justify-between md:items-center sm:px-12 px-4 bg-[#111827] py-2'>
          <h1 className='lg:text-[4xl] text-3xl md:mb-0 mb-6 lg:leading-normal font-semibold md:w-2/5'>
           <span className='text-[#45d879]'>
             Subscribe
