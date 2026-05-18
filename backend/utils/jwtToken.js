@@ -1,26 +1,22 @@
-
-
 //create token and saving cookies
-const sendToken=(user,statusCode,res)=>{
-    const token=user.getJwtToken();
+const sendToken = (user, statusCode, res) => {
+  const token = user.getJwtToken();
 
-    // Options for cookies
-    const options={
-        expires: new Date(Date.now() + 90 *  24  * 60  * 60  *1000),  // in this expiry 1 day
-        httpOnly:true,
-        sameSite: "lax", // 👈 better for localhost
-  secure: false,
-    }
+  // Options for cookies
+  const options = {
+    expires: new Date(Date.now() + 90 * 24 * 60 * 60 * 1000), // in this expiry 1 day
+    httpOnly: true,
+    sameSite: "none", // 👈 better for localhost
+    Secure: true,
+  };
 
-    console.log(process.env.JWT_EXPIRES);
+  console.log(process.env.JWT_EXPIRES);
 
+  res.status(statusCode).cookie("token", token, options).json({
+    success: true,
+    user,
+    token,
+  });
+};
 
-    res.status(statusCode).cookie("token", token,options).json({
-        success:true,
-        user,
-        token,
-    })
-}
-
-
-module.exports=sendToken;
+module.exports = sendToken;

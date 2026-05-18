@@ -4,11 +4,13 @@ const app=express()
 const cookieParser=require("cookie-parser")
 const bodyParser=require("body-parser")
 const cors=require("cors")
+const path=require("path");
 
 app.use(express.json())
 app.use(cookieParser())
 app.use(cors(({ origin: "https://multivendor-e-shop-frontend-iuc506yax-dev-amber1s-projects.vercel.app/", credentials: true })))
-app.use("/",(req,res)=>{
+app.use(express.static(path.join(__dirname, "./uploads")));
+app.use("/test",(req,res)=>{
     res.send("Hello World!");
 });
 app.use(bodyParser.urlencoded({extended:true}))
