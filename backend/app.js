@@ -7,7 +7,7 @@ const cors=require("cors")
 
 app.use(express.json())
 app.use(cookieParser())
-app.use(cors(({ origin: "http://localhost:3000", credentials: true })))
+app.use(cors(({ origin: "https://multivendor-e-shop-frontend-iuc506yax-dev-amber1s-projects.vercel.app/", credentials: true })))
 app.use("/",(req,res)=>{
     res.send("Hello World!");
 });
