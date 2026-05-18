@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 
 const Footer = () => {
   return (
-    <div className='bg-[#000] text-[#fff] '>
+    <div className='bg-[#1F2937] text-[#fff] '>
         <div className='md:flex md:justify-between md:items-center sm:px-12 px-4 bg-[#342ace] py-2'>
          <h1 className='lg:text-[4xl] text-3xl md:mb-0 mb-6 lg:leading-normal font-semibold md:w-2/5'>
           <span className='text-[#45d879]'>
@@ -19,7 +19,7 @@ const Footer = () => {
              placeholder='Enter your email...'  required
              className='text-gray-800 sm:w-72 sm:mr-5 mr-1 lg:mb-0 mb-4 rounded px-2 focus:outline-none'
             />
-            <button className='bg-[#56d879] hover:bg-teal-500 duration-300 px-5 py-2.5 rounded-md text-white md:w-auto w-full'>
+            <button className='bg-[##F59E0B] hover:bg-teal-500 duration-300 px-5 py-2.5 rounded-md text-white md:w-auto w-full'>
              Submit
             </button>
          </div>

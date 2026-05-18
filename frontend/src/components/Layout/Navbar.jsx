@@ -5,7 +5,7 @@ import styles from "../../styles/style";
 
 const Navbar = ({ active }) => {
   return (
-    <div className={`block lg:flex ${styles.normalFlex} bg-[#000]`}>
+    <div className={`block lg:flex ${styles.normalFlex} bg-[#1F2937]`}>
       {navItems &&
         navItems.map((item, index) => (
           <div key={index} className="flex">
