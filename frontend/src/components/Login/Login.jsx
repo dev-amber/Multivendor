@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import styles from "../../styles/style";
 import { Link, useNavigate } from "react-router-dom";
-import axios from "axios"
+import axios from "axios";
 import { server } from "../../server";
 import { toast } from "react-toastify";
 
@@ -10,27 +10,32 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [visible, setVisible] = useState(false);
-  const navigate=useNavigate()
-  const handleSubmit =async(e)=>{
+  const navigate = useNavigate();
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    await axios.post(`${server}/user/login-user`,{
-      email,
-      password,
-    },{withCredentials:true}// bcz we store cookie
-  ). then((res)=>{
-      toast.success("Login Successfull");
-      navigate("/")
-      window.location.reload(true)
-    })
-    .catch((error)=>{
-       toast.error(error.response?.data?.message);
-       console.log(error)
-    })
-  }
+    await axios
+      .post(
+        `${server}/user/login-user`,
+        {
+          email,
+          password,
+        },
+        { withCredentials: true }, // bcz we store cookie
+      )
+      .then((res) => {
+        toast.success("Login Successfull");
+        navigate("/");
+        window.location.reload(true);
+      })
+      .catch((error) => {
+        toast.error(error.response?.data?.message);
+        console.log(error);
+      });
+  };
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-md">
-        <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900" >
+        <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
           Login to your account
         </h2>
       </div>
@@ -116,11 +121,14 @@ const Login = () => {
                 </label>
               </div>
 
-              <div className='text-sm'> 
-                <a href='.forgot-password' className='font-medium text-blue-500 hover:text-blue-500'> 
-                    Forgot your password? 
-                    </a>
-                 </div>
+              <div className="text-sm">
+                <a
+                  href=".forgot-password"
+                  className="font-medium text-blue-500 hover:text-blue-500"
+                >
+                  Forgot your password?
+                </a>
+              </div>
             </div>
 
             {/* Submit Button */}
